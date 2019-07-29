@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"syscall"
 )
 
 // go run main.go run <cmd> <args>
@@ -12,7 +13,7 @@ func main() {
 	case "run":
 		run()
 	default:
-		panic("help")
+		panic("Commnad not found...")
 	}
 }
 
@@ -23,6 +24,11 @@ func run() {
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+
+	// UTS namespace: isolate hostname and domainName
+	cmd.SysProcAttr = &syscall.SysProcAttr{
+		Cloneflags: syscall.CLONE_NEWUTS,
+	}
 
 	must(cmd.Run())
 }
