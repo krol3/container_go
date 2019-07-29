@@ -9,3 +9,13 @@ make run
 hostname
 hostname linux-br
 ```
+
+### f02: PID
+
+- fork exec
+
+```
+make run
+ls /proc
+hostname linux-br
+```
