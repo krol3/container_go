@@ -48,6 +48,7 @@ func child() {
 
 	must(syscall.Chroot("/home/vagrant/ubuntu_xenial_1604"))
 	must(os.Chdir("/"))
+	must(syscall.Mount("proc", "proc", "proc", 0, ""))
 	must(cmd.Run())
 
 }

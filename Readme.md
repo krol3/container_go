@@ -16,8 +16,25 @@ hostname linux-br
 
 ```
 make run
+ls
+ps
 ls /proc
 hostname linux-br
 ```
 
-### f021: PID - rootfs
+### f021: PID - Chroot
+
+```
+make run
+ls
+ps
+```
+
+### f022: PID - Chroot - Mount proc
+
+```
+make run
+ls
+ps
+ls /proc
+```
