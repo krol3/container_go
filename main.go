@@ -46,6 +46,8 @@ func child() {
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
+	must(syscall.Chroot("/home/vagrant/ubuntu_xenial_1604"))
+	must(os.Chdir("/"))
 	must(cmd.Run())
 
 }
