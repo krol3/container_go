@@ -4,7 +4,7 @@ echo Welcome to VM settins ...
 
 add-apt-repository ppa:longsleep/golang-backports
 apt-get update
-apt-get install sysdig golang-go -y
+apt-get install sysdig golang-go debootstrap -y
 
 ## boot
 echo ...... debootstrap ...
