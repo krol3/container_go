@@ -42,3 +42,9 @@ ls
 ps
 ls /proc
 ```
+
+## Resources
+
+[Julian Friedman - Build your own container](https://www.infoq.com/articles/build-a-container-golang/)
+Liz Rice - Building a container from scratch in Go
+[Ed King - Namespaces](https://medium.com/@teddyking/linux-namespaces-850489d3ccf)
