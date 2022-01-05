@@ -2,33 +2,46 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net/http"
 	"os"
-	"os/exec"
+
+	"github.com/krol3/container_go/pkg"
 )
 
 // go run main.go run <cmd> <args>
 func main() {
-	switch os.Args[1] {
-	case "run":
-		run()
-	default:
-		panic("help")
-	}
-}
 
-func run() {
-	fmt.Printf("Running %v \n", os.Args[2:])
+	// handle route using handler function
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Welcome to new server!")
+	})
+	http.HandleFunc("/run", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("GET params were:", r.URL.Query())
 
-	cmd := exec.Command(os.Args[2], os.Args[3:]...)
-	cmd.Stdin = os.Stdin
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+		// if only one expected
+		param1 := r.URL.Query().Get("cmd")
+		if param1 != "" {
+			pkg.ExecuteRun(param1)
+		}
+	})
 
-	must(cmd.Run())
-}
+	// listen to port
+	http.ListenAndServe(":5050", nil)
 
-func must(err error) {
-	if err != nil {
-		panic(err)
+	if len(os.Args) <= 1 {
+		fmt.Println("Missing the param")
+		log.Println("Default param 0: %s", os.Args[0])
+		os.Exit(1)
+	} else {
+
+		switch os.Args[1] {
+		case "run":
+			println("run")
+			pkg.ExecuteRun("ls")
+		default:
+			log.Fatal("Unknown command. Use run <command_name>, like `run /bin/bash` or `run echo hello`")
+			panic("help")
+		}
 	}
 }

@@ -1,8 +1,11 @@
 # Building a Container with Golang
 
-### Virtualbox with vagrant
+### Test
 
-`cd vagrant && make up`
+```
+curl
+http://localhost:5050/run?cmd=pwd
+```
 
 ## Branchs
 
