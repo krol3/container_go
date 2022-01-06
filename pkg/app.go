@@ -7,7 +7,7 @@ import (
 )
 
 func ExecuteRun(input string, arg ...string) {
-	log.Printf("Running %v \n", input)
+	log.Printf("Executing: [%v] \n", input)
 
 	cmd := exec.Command(input)
 	cmd.Stdin = os.Stdin

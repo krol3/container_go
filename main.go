@@ -17,7 +17,7 @@ func main() {
 		fmt.Fprintf(w, "Welcome to new server!")
 	})
 	http.HandleFunc("/run", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Println("GET params were:", r.URL.Query())
+		log.Println("GET params:", r.URL.Query())
 
 		// if only one expected
 		param1 := r.URL.Query().Get("cmd")
@@ -27,14 +27,13 @@ func main() {
 	})
 
 	// listen to port
-	http.ListenAndServe(":5050", nil)
+	http.ListenAndServe("0.0.0.0:5050", nil)
 
 	if len(os.Args) <= 1 {
-		fmt.Println("Missing the param")
-		log.Println("Default param 0: %s", os.Args[0])
+		log.Println("Missing the param")
+		//log.Println("Default param 0: %s", os.Args[0])
 		os.Exit(1)
 	} else {
-
 		switch os.Args[1] {
 		case "run":
 			println("run")
